@@ -26,7 +26,7 @@ class EEGTablePacket(object):
         self.gyro_y = data["Y"]["value"]
         self.old_model = True
 
-class EEGTableConverter(object):
+class EEGTableDataSource(object):
     
     def __init__(self, filePath=None, infinite=True):
         '''
@@ -75,7 +75,7 @@ class EEGTableConverter(object):
     def close(self):
         pass
 
-class EEGTableToPacketConverter(EEGTableConverter):
+class EEGTablePacketSource(EEGTableDataSource):
     '''
     Util for EPOC dummy data 
     
@@ -100,7 +100,7 @@ class EEGTableToPacketConverter(EEGTableConverter):
         '''
         Reads data from ./../../examples/example_4096.csv and builds the data structure
         '''
-        EEGTableConverter.__init__(self, filePath, infinite)
+        EEGTableDataSource.__init__(self, filePath, infinite)
 
     def _buildDataStructure(self):
         data = []
@@ -134,7 +134,7 @@ class EEGTableToPacketConverter(EEGTableConverter):
     def close(self):
         pass
 
-class EEGTableToWindowConverter(EEGTableConverter):
+class EEGTableWindowSource(EEGTableDataSource):
     '''
     Util for EPOC dummy data 
     
@@ -162,7 +162,7 @@ class EEGTableToWindowConverter(EEGTableConverter):
         '''
         Reads data from ./../../examples/example_4096.csv and builds the data structure
         '''
-        EEGTableConverter.__init__(self, filePath, infinite)
+        EEGTableDataSource.__init__(self, filePath, infinite)
         self.windowSize = windowSize
 
 
